@@ -14,8 +14,8 @@ number = int(input('Enter a number: '))
 
 # iterate until the user enters 0
 while number != 0:
-    print(f'You entered {number}.')
-    number = int(input('Enter a number: '))
+    print(f'You entered {number}.') # f is used for formatting that is used to concatenate string with number
+    number = int(input('Enter a number: ')) # 
 
 print('The end.')
 

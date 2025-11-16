@@ -5,7 +5,7 @@ n = 10
 
 # use pass inside if statement
 if n > 10:
-    pass
+    pass # is used to move forward instead of writing code and left this step for future purposes
 
 print('Hello')
 
@@ -15,7 +15,7 @@ print(" Next Run...")
 #Example: break Statement with for Loop
 for i in range(5):
     if i == 3:
-        break
+        break # means stop peocessing here, stop present loop or further also 
     print(i)
 
 # next run
@@ -25,7 +25,7 @@ print(" Next Run...")
 
 for i in range(5):
     if i == 3:
-        continue
+        continue # is used to stop present but doesnot stop further executions
     print(i)
 
 

@@ -43,7 +43,7 @@ print('This statement is always executed')
 # next run
 print(" Next Run...")
 
-
+# in python we doesnt use curly bracekts but used tabs or space for this purpose 
 #Python Nested if Statements
 
 number = 5

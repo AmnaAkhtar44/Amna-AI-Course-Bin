@@ -40,11 +40,11 @@ print (" Next  run")
 # Initialize an empty list
 a = []
 
-# Adding 10 to end of list
+# Adding 10 to end of list # Append is used to add new elements at the end of list
 a.append(10)  
 print("After append(10):", a)  
 
-# Inserting 5 at index 0
+# Inserting 5 at index 0 # Insert add element at the order which is given
 a.insert(0, 5)
 print("After insert(0, 5):", a) 
 
@@ -53,8 +53,8 @@ a.extend([15, 20, 25])
 print("After extend([15, 20, 25]):", a) 
 
 # a list containing strings, numbers and another list
-student = ['Jack', 32, 'Computer Science', [2, 4]]
-print(student)
+student = ['Jack', 32, 'Computer Science', [2, 4]] #we can acces elements of list in list can be accessed
+print(student)    # L[4[0]] it gives 2 as output 
 
 # an empty list
 empty_list = []
@@ -81,7 +81,7 @@ a = [10, 20, 30, 40, 50]
 a.remove(30)  
 print("After remove(30):", a)
 
-# Removes the element at index 1 (20)
+# Removes the element at index 1 (20) #remove element from index which is given by us 
 popped_val = a.pop(1)  
 print("Popped element:", popped_val)
 print("After pop(1):", a) 

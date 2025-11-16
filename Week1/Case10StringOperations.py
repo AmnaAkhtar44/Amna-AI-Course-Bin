@@ -14,7 +14,7 @@ print(text.lower())
 
 # converts the first character to 
 # upper case and rest to lower case 
-print("\nConverted String:")
+print("\nConverted String:") 
 print(text.title())
 
 # swaps the case of all characters in the string
@@ -30,7 +30,7 @@ print(text.capitalize())
 print("\nOriginal String")
 print(text)
 
-
+# slice,breaking the string
 st = "WsCubeTech"  #
 print(st[::])      #WsCubeTech
 print(st[0::])     #WsCubeTech
@@ -42,15 +42,16 @@ print(st[-3::-1])  #eTebuCsW
 print(st[2:5:])    #Cub
 
 
-st = "WsCubeTech"
+st = "WsCubeTech" # len fn is used to describe the lenghth of variable 
 n = len(st)
 print(n)
 
 
-st = "WsCubeTech"
+st = "WsCubeTech" # right to left scanning  or if +1 is used to scan from left to right 
 rev_st = st[::-1]
 print(rev_st)
 
 
 for i in "WsCubeTech":
+   # if(i--2) we can add conddition but this is for loof for string
     print(i)

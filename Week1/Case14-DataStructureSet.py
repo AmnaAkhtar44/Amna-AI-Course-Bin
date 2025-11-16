@@ -77,7 +77,7 @@ numbers = {21, 34, 54, 12}
 print('Initial Set:',numbers)
 
 # using add() method
-numbers.add(32)
+numbers.add(32) # Add can add value at any order not only at the end 
 
 print('Updated Set:', numbers) 
 

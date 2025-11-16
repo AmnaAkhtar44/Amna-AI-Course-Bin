@@ -47,7 +47,7 @@ t = (1, 2, 3, 4, 5)
 
 # Traverse through each item in the tuple
 for x in t:
-    print(x, end=" ")
+ print(x, end=" ") # end means it separated value according to this if we enter / in end it separated values with /
 
 
 

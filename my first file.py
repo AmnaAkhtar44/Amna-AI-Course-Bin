@@ -1,0 +1,1 @@
+print("my name is Amna student of BSCS from affiliated colllege of punjab University")
