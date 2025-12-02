@@ -4,7 +4,7 @@ import pandas as pd
 #  Read csv file to DataFrame
 #  Reference: https://pandas.pydata.org/docs/dev/reference/api/pandas.read_csv.html
 #  Note below, date formatting - In Pandas, DateTime is a data type that represents a single point in time. It is especially useful when dealing with time-series data like stock prices, weather records, economic indicators etc.
-df = pd.read_csv('Week4/zameencom-property-data-By-Kaggle-short.csv',delimiter=";",parse_dates=[14], date_format={'date_added': '%d-%m-%Y'})
+df = pd.read_csv('Amna-AI-Course-Bin\Week4\zameencom-property-data-By-Kaggle-Short.csv',delimiter=";",parse_dates=[14], date_format={'date_added': '%d-%m-%Y'})
 
 print(df)
 
@@ -104,7 +104,7 @@ second_row3 = df.loc[1:5]
 print("#Selecting a slice of rows using .loc")
 print(second_row3)
 print()
-
+# loc works on primary key and iloc works on index like array
 
 #Conditional selection of rows using .loc
 second_row4 = df.loc[df['agency'] == 'Gateway Properties']
@@ -137,7 +137,7 @@ print(second_row8)
 print()
 # Case 1 : using .loc - default case - ends here
 
-
+# loc works on primary key iloc works on index column
 print("# Case 2 : using .loc with index_col - starts here")
 # Case 2 : using .loc with index_col - starts here
 # Second cycle - with index_col as property_id

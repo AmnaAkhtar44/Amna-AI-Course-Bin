@@ -1,48 +1,49 @@
 
 # FastFoodRestaurants.csv
-import numpy as np    # np is the name of variable 
+import numpy as np
 
-address,city,country,keys,lat,long,name,postalCode, province , website= np.genfromtxt(r'Amna-AI-Course-Bin\NumpyPractice\FastFoodRestaurants (1).csv', delimiter=',', usecols=(0,4,5,6), unpack=True, dtype=('U100','U100','U100','U100','f8','f8','U100' ,'f8' ,'U100' ,'U100'),skip_header=1 , invalid_raise=False)
+np.set_printoptions(threshold=np.inf, linewidth=np.inf)
 
-print(address)        
-print(city)  
-print(country)        
-print(keys) 
-print(lat)        
-print(long)        
-print(name)        
-print(postalCode)        
-print(province)        
-print(website)        
+address, latitude , longitude , name, = np.genfromtxt("Amna-AI-Course-Bin/NumpyPractice/FastFoodRestaurants (1).csv",
+                                                                delimiter=',',
+                                                                usecols=(0, 4, 5, 6),
+                                                                unpack=True,
+                                                                dtype=('U100', 'f8', 'f8', 'U100'),   # force correct types
+                                                                encoding='utf-8',
+                                                                skip_header=1,
+                                                                invalid_raise=False)
 
+print(address)
+print(latitude)
+print(longitude)
+print(name)
 
-#valuation = np.char.replace(valuation, "$", "")
-#valuation = valuation.astype(float)
+cleaned_longitude = longitude[~np.isnan(longitude)]
+# Zameen.com price  - statistics operations
+print("US Food Restaurant DataSet longitude mean:", np.nanmean(longitude))
+print("US Food Restaurant DataSet longitude average:", np.nanmean(longitude))  # same as mean
+print("US Food Restaurant DataSet longitude std:", np.nanstd(longitude))
+print("US Food Restaurant DataSet longitude median: ",np.nanmedian(longitude))
+print("US Food Restaurant DataSet longitude percentile - 25:", np.percentile(cleaned_longitude, 25))
+print("US Food Restaurant DataSet longitude percentile - 75:", np.percentile(cleaned_longitude, 75))
+print("US Food Restaurant DataSet longitude percentile - 3:", np.percentile(cleaned_longitude, 3))
+print("US Food Restaurant DataSet longitude max:", np.nanmax(longitude))
+print("US Food Restaurant DataSet longitude min:", np.nanmin(longitude))
 
-# FastFood - Statistical operations 
-print("FastFoodRestaurants latitude mean ",np.mean(lat))
-print("FastFoodRestaurants latitude Average ",np.average(lat))
-print("FastFoodRestaurants latitude mean ",np.median(lat))
-print("FastFoodRestaurants latitude mean ",np.std(lat))
-print("FastFoodRestaurants latitude percentile - 25: " , np.percentile(lat,25))
-print("FastFoodRestaurants latitude percentile  - 75: " , np.percentile(lat,75))
-print("FastFoodRestaurants latitude percentile  - 3: " , np.percentile(lat,3))
-print("FastFoodRestaurants latitude min : " , np.min(lat))
-print("FastFoodRestaurants latitude max : " , np.max(lat))
 
 # FastFoodRestaurants - Maths operations 
 
-print("FastFoodRestaurants latitude square: " , np.square(lat))
-print("FastFoodRestaurants latitude sqrt: " , np.sqrt(lat))
-print("FastFoodRestaurants latitude pow: " , np.power(lat,lat))
-print("FastFoodRestaurants latitude abs: " , np.abs(lat))
+print("FastFoodRestaurants latitude square: " , np.square(cleaned_longitude))
+print("FastFoodRestaurants latitude sqrt: " , np.sqrt(cleaned_longitude))
+print("FastFoodRestaurants latitude pow: " , np.power(cleaned_longitude,cleaned_longitude))
+print("FastFoodRestaurants latitude abs: " , np.abs(cleaned_longitude))
 
 # Perform basic Arithmetic Operations 
 
-addition = long + lat
-subtraction = long - lat
-multiplication = long * lat
-division = long / lat
+addition = cleaned_longitude + latitude
+subtraction = cleaned_longitude - latitude
+multiplication = cleaned_longitude * latitude
+division = cleaned_longitude / latitude
 
 print("FastFoodRestaurants - lat - Addition:", addition)
 print("FastFoodRestaurants - lat - Subtraction:", subtraction)
@@ -51,7 +52,7 @@ print("FastFoodRestaurants - lat - Division:", division)
 
 #Trigonometric Functions
 
-latitudePie = (lat/np.pi) +1
+latitudePie = (latitude/np.pi) +1
 # Calculate sine, cosine, and tangent
 sine_values = np.sin(latitudePie)
 cosine_values = np.cos(latitudePie)
@@ -100,8 +101,8 @@ print("FastFoodRestaurants latitude - div - pie   -Inverse Hyperbolic Cosine val
 
 
 #  Long Plus Lat - 2 dimentional arrary
-D2LongLat = np.array([long,
-                  lat])
+D2LongLat = np.array([longitude,
+                  latitude])
 
 print ("FastFoodRestaurants Long Plus Lat - 2 dimentional arrary - " ,D2LongLat)
 
