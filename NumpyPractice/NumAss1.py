@@ -35,8 +35,8 @@ print("US Food Restaurant DataSet longitude min:", np.nanmin(longitude))
 
 print("FastFoodRestaurants latitude square: " , np.square(cleaned_longitude))
 print("FastFoodRestaurants latitude sqrt: " , np.sqrt(cleaned_longitude))
-print("FastFoodRestaurants latitude pow: " , np.power(cleaned_longitude,cleaned_longitude))
-print("FastFoodRestaurants latitude abs: " , np.abs(cleaned_longitude))
+print("FastFoodRestaurants latitude pow: " , np.power(latitude , latitude))
+print("FastFoodRestaurants latitude abs: " , np.abs(latitude))
 
 # Perform basic Arithmetic Operations 
 

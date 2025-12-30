@@ -1,7 +1,7 @@
 #zameencom-property-data-By-Kaggle.csv
 import numpy as np # np is variable name it can be changed , if we used add numpy in file use this code line 
 
-ids, price ,ong , lat = np.genfromtxt('Week4/zameencom-property-data-By-Kaggle-short.csv', delimiter=';', usecols=(0,4,8,9), unpack=True, dtype=None,skip_header=1) l
+ids, price ,long , lat = np.genfromtxt('Week4/zameencom-property-data-By-Kaggle-short.csv', delimiter=';', usecols=(0,4,8,9), unpack=True, dtype=None,skip_header=1) l
 
 print(ids)
 print(price)

@@ -1,10 +1,7 @@
-#zameencom-property-data-By-Kaggle.csv
+#FastFoodRestaurants
 import pandas as pd
 
-#  Read csv file to DataFrame
-#  Reference: https://pandas.pydata.org/docs/dev/reference/api/pandas.read_csv.html
-#  Note below, date formatting - In Pandas, DateTime is a data type that represents a single point in time. It is especially useful when dealing with time-series data like stock prices, weather records, economic indicators etc.
-df = pd.read_csv(r'Amna-AI-Course-Bin/Week4/zameencom-property-data-By-Kaggle-Short.csv',delimiter=";",parse_dates=[14], date_format={'date_added': '%d-%m-%Y'})
+df = pd.read_csv(r'Amna-AI-Course-Bin/PandasPractice/FastFoodRestaurants (1).csv',delimiter=",")
 
 print(df)
 
@@ -31,9 +28,10 @@ print()
 
 
 # access the Name column
-agency = df['agency']
+
+country= df['country']
 print("access the Name column: df : ")
-print(agency)
+print(country)
 print()
 
 """
@@ -51,9 +49,9 @@ print()
 """
 
 # access multiple columns
-agency_agent = df[['agency','agent']]
+country_name = df[['country','name']]
 print("access multiple columns: df : ")
-print(agency_agent)
+print(country_name)
 print()
 
 
@@ -107,31 +105,31 @@ print()
 # loc works on primary key and iloc works on index like array
 
 #Conditional selection of rows using .loc
-second_row4 = df.loc[df['agency'] == 'Gateway Properties']
+second_row4 = df.loc[df['country'] == 'province']
 print("#Conditional selection of rows using .loc")
 print(second_row4)
 print()
 
 #Selecting a single column using .loc
-second_row5 = df.loc[:1,'agency']
+second_row5 = df.loc[:1,'country']
 print("#Selecting a single column using .loc")
 print(second_row5)
 print()
 
 #Selecting multiple columns using .loc
-second_row6 = df.loc[:1,['agency','agent']]
+second_row6 = df.loc[:1,['country','name']]
 print("#Selecting multiple columns using .loc")
 print(second_row6)
 print()
 
 #Selecting a slice of columns using .loc
-second_row7 = df.loc[:1,'location':'agency']
+second_row7 = df.loc[:1,'address':'keys']
 print("#Selecting a slice of columns using .loc")
 print(second_row7)
 print()
 
 #Combined row and column selection using .loc
-second_row8 = df.loc[df['agency'] == 'Gateway Properties','location':'agency']
+second_row8 = df.loc[df['country'] == 'Gateway Properties','name':'website']
 print("#Combined row and column selection using .loc")
 print(second_row8)
 print()
@@ -142,7 +140,7 @@ print("# Case 2 : using .loc with index_col - starts here")
 # Case 2 : using .loc with index_col - starts here
 # Second cycle - with index_col as property_id
 # Why Second cycle - Note Index - , index_col='property_id'
-df_index_col = pd.read_csv('Amna-AI-Course-Bin/Week4/zameencom-property-data-By-Kaggle-Short.csv',delimiter=";",parse_dates=[14], date_format={'date_added': '%d-%m-%Y'} , index_col='property_id')
+df_index_col = pd.read_csv(r'Amna-AI-Course-Bin/PandasPractice/FastFoodRestaurants (1).csv',delimiter="," , index_col='latitude')
 
 print(df_index_col)
 print(df_index_col.dtypes)
@@ -150,50 +148,50 @@ print(df_index_col.info())
 # Second cycle - with index_col as property_id
 
 #Selecting a single row using .loc
-second_row = df_index_col.loc[482892]
+second_row = df_index_col.loc[44.9213]
 print("#Selecting a single row using .loc")
 print(second_row)
 print()
 
 #Selecting multiple rows using .loc
-second_row2 = df_index_col.loc[[482892, 555962]]
+second_row2 = df_index_col.loc[[44.9213, 44.95008]]
 print("#Selecting multiple rows using .loc")
 print(second_row2)
 print()
 
 #Selecting a slice of rows using .loc
-second_row3 = df_index_col.loc[482892:686990]
+second_row3 = df_index_col.loc[39.86969:33.61937]
 print("#Selecting a slice of rows using .loc")
 print(second_row3)
 print()
 
 #Conditional selection of rows using .loc
-second_row4 = df_index_col.loc[df_index_col['agency'] == 'Gateway Properties']
+second_row4 = df_index_col.loc[df_index_col['country'] == 'Gateway Properties']
 print("#Conditional selection of rows using .loc")
 print(second_row4)
 print()
 
 #Selecting a single column using .loc
-second_row5 = df_index_col.loc[:686990,'agency']
+second_row5 = df_index_col.loc[:35.52234,'country']
 print("#Selecting a single column using .loc")
 print(second_row5)
 print()
 
 
 #Selecting multiple columns using .loc
-second_row6 = df_index_col.loc[:686990,['agency','agent']]
+second_row6 = df_index_col.loc[:40.803141,['country','name']]
 print("#Selecting multiple columns using .loc")
 print(second_row6)
 print()
 
 #Selecting a slice of columns using .loc
-second_row7 = df_index_col.loc[:686990,'location':'agency']
+second_row7 = df_index_col.loc[:33.450731,'location':'agency']
 print("#Selecting a slice of columns using .loc")
 print(second_row7)
 print()
 
 #Combined row and column selection using .loc   # columns whose names are gateway prop.
-second_row8 = df_index_col.loc[df_index_col['agency'] == 'Gateway Properties','location':'agency']
+second_row8 = df_index_col.loc[df_index_col['keys'] == 'Gateway Properties','location':'keys']
 print("#Combined row and column selection using .loc")
 print(second_row8)
 print()
@@ -268,11 +266,10 @@ Renaming rows/columns"""
 # Copy array from list and add to DataFrame
 # 3477952;82;"https://www.zameen.com/Property/lahore_model_town_6_kanal_excellent_house_for_sale_in_model_town-347795-8-12.html";"House2";2200000002;"Model Town2";"Lahore2";"Punjab2";312.483868658082;742.325685501099;02;"6 Kanal2";"For Sale2";02;"07-17-2019";"Real Biz International2";"Usama Khan2"
 
-df.loc[len(df.index)] = [3477952,82,"https://www.zameen.com/Property/lahore_model_town_6_kanal_excellent_house_for_sale_in_model_town-347795-8-12.html","House2",2200000002,"Model Town2","Lahore2","Punjab2",312.483868658082,742.325685501099,2,"6 Kanal2","For Sale2",2,"07-17-2019","Real Biz International2","Usama Khan2"] 
+#df.loc[len(df.index)]=[530 Clinton Ave,Washington Court House,US,us/oh/washingtoncourthouse/53/-791445730,39.53255,-83.44526,Wendy's,43160,OH,http://www.wendys.com ]
 print("Modified DataFrame - add a new row:")
 print(df)
 print()
-
 
 #Remove Rows/Columns from a Pandas DataFrame
 
@@ -290,11 +287,11 @@ print(df)
 
 
 # delete age column # Axis 1 means column
-df.drop('page_url', axis=1, inplace=True) # inplace means to drop from given df otherwise we should store modified df after inplaced df in other variable
+df.drop('longitude', axis=1, inplace=True) # inplace means to drop from given df otherwise we should store modified df after inplaced df in other variable
 # delete marital status column
-df.drop(columns='property_type', inplace=True)
+df.drop(columns='keys', inplace=True)
 # delete height and profession columns
-df.drop(['location', 'city'], axis=1, inplace=True)
+df.drop(['websites', 'city'], axis=1, inplace=True)
 # display the modified DataFrame after deleting rows
 print("Modified DataFrame -  delete page_url ,property_type , location , city , column :")
 print(df)
@@ -325,7 +322,7 @@ print(df)
 #The query() method in Pandas allows you to select data using a more SQL-like syntax.
 
 # select the rows where the age is greater than 25
-selected_rows = df.query('agency == \'Gateway Properties\' or price > 11000000')
+selected_rows = df.query('latitude == \'Gateway Properties\' or latitude > 39.35155')
 
 print(selected_rows.to_string())
 print(len(selected_rows))
@@ -333,13 +330,13 @@ print(len(selected_rows))
 
 
 # sort DataFrame by price in ascending order
-sorted_df = df.sort_values(by='price')
+sorted_df = df.sort_values(by='latitude')
 print(sorted_df.to_string(index=False))
 
 #Sort Pandas DataFrame by Multiple Columns
 
 # 1. Sort DataFrame by 'Age' and then by 'Score' (Both in ascending order)
-df1 = df.sort_values(by=['price', 'location_id'])
+df1 = df.sort_values(by=['latitude', 'name'])
 
 print("Sorting by 'price' (ascending) and then by 'location_id' (ascending):\n")
 print(df1.to_string(index=False))
@@ -379,7 +376,7 @@ line_width: Defines the maximum character width of a row before wrapping text.""
 
 # group the DataFrame by the location_id column and
 # calculate the sum of price for each category
-grouped = df.groupby('location_id')['price'].sum()
+grouped = df.groupby('latitude')['latitude'].sum()
 
 print(grouped.to_string())
 print("grouped :" , len(grouped))

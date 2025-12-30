@@ -26,7 +26,7 @@ sns.set_theme(style='darkgrid')
 # Alternatively
 # sns.set_style('darkgrid')
 
-# Create a plot
+# Create a plot # we can also attach pd.csv file 
 sns.lineplot(x='x', y='y', data=data)
 plt.show()
 
@@ -51,7 +51,7 @@ plt.show()
 """Customizing Themes
 It is possible to customize the themes further by passing a dictionary of parameters to the rc argument of seaborn.set_theme() or seaborn.set_style(). This allows for fine-grained control over the appearance of plots."""
 
-# Customize the theme
+# Customize the  theme # we can overwrite things using rc dictionary
 sns.set_theme(style='darkgrid', rc={'axes.facecolor': 'grey', 'grid.color': 'white'})
 
 # Create a plot
@@ -87,7 +87,7 @@ figure.facecolor: Background color of the entire figure."""
 
 #Zameencom data - based examples
 # Load data from a CSV file
-df = pd.read_csv('Week4/zameencom-property-data-By-Kaggle-short.csv',delimiter=";", parse_dates=[14],  date_format={'date_added': '%m-%d-%Y'} , index_col='property_id')
+df = pd.read_csv('Amna-AI-Course-Bin/Week4/zameencom-property-data-By-Kaggle-Short.csv',delimiter=";", parse_dates=[14],  date_format={'date_added': '%m-%d-%Y'} , index_col='property_id')
 
 print(df.dtypes)
 dffilter= df.head(40)
