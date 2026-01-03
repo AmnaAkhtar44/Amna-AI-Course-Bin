@@ -1,43 +1,42 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import csv
 import os
 
+url = "https://www.daraz.pk/catalog/?q=Smart%20Phones"
 
-url = "https://www.daraz.pk/catalog/?spm=a2a0e.tm80331704.cate_5.5.77cc5aa7fPImi7&q=Smart%20Phones&from=hp_categories&src=all_channel"
-
-cService = webdriver.ChromeService(executable_path='C:\\Users\\ORACLE\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe')
-driver = webdriver.Chrome(service=cService)
+service = Service(r"C:\\Users\\ORACLE\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe")
+driver = webdriver.Chrome(service=service)
+wait = WebDriverWait(driver, 30)
 
 driver.get(url)
-qouestList=[]
-qoutesDiv = driver.find_elements(By.XPATH, "//div[contains(@class, 'product3InARowItemV2_42f6f101')]")
-for p in range(len(qoutesDiv) -1):
-    quote = {}
-    innerImg = qoutesDiv[p+1].find_element(By.TAG_NAME, "img")
-    quote["img"] =innerImg.get_attribute('src') 
-    quote["lines"] =innerImg.get_attribute('alt') 
-    quote["aurthor"] =innerImg.get_attribute('style') 
-    qouestList.append(quote)
 
-
-filename = 'WebScrapPractice/daraz_quotesMethod3.csv'
-
-os.makedirs(os.path.dirname(filename), exist_ok=True)
-
-with open(filename, 'w', newline='', encoding='utf-8') as f:
-    writer = csv.DictWriter(
-        f,
-        fieldnames=['img','lines','author']
+products = wait.until(
+    EC.presence_of_all_elements_located(
+        (By.XPATH, "//div[@data-qa-locator='fs-card-img']")
     )
+)
+
+data = []
+for p in products:
+    try:
+        img = p.find_element(By.TAG_NAME, "img")
+        data.append({
+            "img": img.get_attribute("src"),
+            "lines": img.get_attribute("alt"),
+            "author": "Daraz"
+        })
+    except:
+        pass
+
+os.makedirs("C:/Temp", exist_ok=True)
+with open("C:/Temp/daraz_products.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.DictWriter(f, fieldnames=["img", "lines", "author"])
     writer.writeheader()
+    writer.writerows(data)
 
-    writer.writerow({
-        'img': 'image1.jpg',
-        'lines': 'Sample quote',
-        'author': 'Unknown'
-    })
-
-    
-driver.close()
+driver.quit()
+print("Done")

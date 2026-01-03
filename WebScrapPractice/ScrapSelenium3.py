@@ -9,10 +9,9 @@ url = "https://www.amazon.com/gp/browse.html?node=6563140011&ref_=nav_em_amazon_
 
 cService = webdriver.ChromeService(executable_path='C:\\Users\\ORACLE\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe')
 driver = webdriver.Chrome(service=cService)
-
 driver.get(url)
 qouestList=[]
-qoutesDiv = driver.find_elements(By.XPATH, "//div[contains(@class, 'a-declarative')]")
+qoutesDiv = driver.find_elements(By.XPATH, "//div[contains(@class, 'rush-component']")
 for p in range(len(qoutesDiv) -1):
     quote = {}
     innerImg = qoutesDiv[p+1].find_element(By.TAG_NAME, "img")
