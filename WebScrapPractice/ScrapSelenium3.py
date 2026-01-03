@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import csv
+import os
+
 
 url = "https://www.amazon.com/gp/browse.html?node=6563140011&ref_=nav_em_amazon_smart_home_0_2_8_2"
 
@@ -10,7 +12,7 @@ driver = webdriver.Chrome(service=cService)
 
 driver.get(url)
 qouestList=[]
-qoutesDiv = driver.find_elements(By.XPATH, "//div[contains(@class, 'picture-wrapper jBwCF')]")
+qoutesDiv = driver.find_elements(By.XPATH, "//div[contains(@class, 'a-declarative')]")
 for p in range(len(qoutesDiv) -1):
     quote = {}
     innerImg = qoutesDiv[p+1].find_element(By.TAG_NAME, "img")
@@ -19,11 +21,23 @@ for p in range(len(qoutesDiv) -1):
     quote["aurthor"] =innerImg.get_attribute('style') 
     qouestList.append(quote)
 
-filename = 'WebScrapPractice/amazon_quotesMethod3.csv'
-with open(filename, 'w', newline='') as f:
-    w = csv.DictWriter(f,['img','lines','aurthor'])
-    w.writeheader()
-    for quote in qouestList:
-        w.writerow(quote)
 
+filename = 'WebScrapPractice/amazon_quotesMethod3.csv'
+
+os.makedirs(os.path.dirname(filename), exist_ok=True)
+
+with open(filename, 'w', newline='', encoding='utf-8') as f:
+    writer = csv.DictWriter(
+        f,
+        fieldnames=['img','lines','author']
+    )
+    writer.writeheader()
+
+    writer.writerow({
+        'img': 'image1.jpg',
+        'lines': 'Sample quote',
+        'author': 'Unknown'
+    })
+
+    
 driver.close()

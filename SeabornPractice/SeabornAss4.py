@@ -5,7 +5,7 @@ import seaborn as sns
 
 data = pd.DataFrame({'city' : np.arange(100) , 'price' : np.random.rand(100).cumsum()})
 
-sns.lineplot(x = 'city' , y = 'price' , data=data)
+sns.lineplot(x = 'city' , y = 'price' , data=data)              
 plt.show()
 # hue bed kind scatter
 sns.set_theme(style = 'whitegrid')
