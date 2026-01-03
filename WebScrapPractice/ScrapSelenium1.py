@@ -54,7 +54,7 @@ options.page_load_strategy = "eager"
 # Chrome Service
 # =========================
 service = Service(
-    executable_path=r"C:\Users\ORACLE\Downloads\chromedriver-win64\chromedriver-win64\chromedriver.exe"
+    executable_path=r"C:\\Users\\ORACLE\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe"
 )
 
 driver = webdriver.Chrome(service=service, options=options)
@@ -85,7 +85,7 @@ for el in elements:
 # =========================
 quotesList = []
 
-for div in quotesDiv:
+for div in quoteDiv:
     try:
         quote = {}
 

@@ -11,10 +11,10 @@ soup = BeautifulSoup(r.content, 'html5lib')
  
 quotes=[]  # a list to store quotes   class="text-center mb-8"
  
-table = soup.find('div', attrs = {'id':'all_items'}) 
+table = soup.find('div', attrs = {'id':'beacon-aplus'}) 
  
 for row in table.find_all('div',
-                         attrs = {'class' : "text-center mb-8"}):
+                         attrs = {'class' : "daraz"}):
     quote = {}
     quote['theme'] = row.h5.text
     quote['url'] = row.a['href']
