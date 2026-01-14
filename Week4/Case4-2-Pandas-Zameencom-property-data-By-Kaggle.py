@@ -306,7 +306,7 @@ df.rename(columns= {'province_name': 'province_nameChanged'}, inplace=True)
 # rename columns 'Age' and 'City'
 df.rename(mapper= {'bedrooms': 'bedrooms_Changed', 'date_added':'date_added_Changed'}, axis=1, inplace=True)
 # display the DataFrame after renaming column
-print("Modified DataFrame  - Rename Labels :")
+tf print("Modified DataFrame  - Rename Labels :")
 print(df)
 
 

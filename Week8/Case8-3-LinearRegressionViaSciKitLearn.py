@@ -57,7 +57,7 @@ values of our columns:
 print("df.describe():                    " , df.describe())
 
 
-print(" df['Scores'] :     " , df['Scores'])
+print(" df['Scores'] :     " , ,df['Scores'])
 print("  df['Hours']   :    ", df['Hours']   )
 
 """To separate the target and features, we can attribute the dataframe column values to our y and X variables:"""

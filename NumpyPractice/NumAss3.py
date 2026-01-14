@@ -1,5 +1,3 @@
-
-
 # US-Startups Funding in 2021 end.csv
 import numpy as np
 
