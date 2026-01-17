@@ -28,7 +28,7 @@ print(df.head())
 print("df.shape:         " , df.shape)
 
 #So, what's the relationship between these variables? A great way to explore relationships between variables is through Scatter plots. We'll plot the hours on the X-axis and scores on the Y-axis, and for each pair, a marker will be positioned based on their values:
-df.plot.scatter(x='Hours', y='Scores', title='Scatter Plot of hours and scores percentages');
+df.plot.scatter(x='Hours', y='Scores', title='Scatter Plot of hours and scores percentages')
 plt.show()
 
 """"The equation that describes any straight line is:
@@ -57,7 +57,7 @@ values of our columns:
 print("df.describe():                    " , df.describe())
 
 
-print(" df['Scores'] :     " , ,df['Scores'])
+print(" df['Scores'] :     " , df['Scores'])
 print("  df['Hours']   :    ", df['Hours']   )
 
 """To separate the target and features, we can attribute the dataframe column values to our y and X variables:"""

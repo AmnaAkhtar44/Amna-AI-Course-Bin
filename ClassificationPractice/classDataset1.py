@@ -3,7 +3,6 @@ import pandas as pd
 from sklearn.datasets import load_digits
 
 
-
 digits_data = load_digits()
 
 

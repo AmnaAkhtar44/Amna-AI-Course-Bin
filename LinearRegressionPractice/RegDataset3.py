@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #Let's read the CSV file and package it into a DataFrame:
-df = pd.read_csv('Amna-AI-Course-Bin/Week8/student_scores.csv')
+df = pd.read_csv('Amna-AI-Course-Bin/auto-mpg[1].csv')
 
 #Once the data is loaded in, let's take a quick peek at the first 5 values using the head() method:
 print(df.head())
@@ -12,24 +12,24 @@ print(df.head())
 print("df.shape:         " , df.shape)
 
 #So, what's the relationship between these variables? A great way to explore relationships between variables is through Scatter plots. We'll plot the hours on the X-axis and scores on the Y-axis, and for each pair, a marker will be positioned based on their values:
-df.plot.scatter(x='Hours', y='Scores', title='Scatter Plot of hours and scores percentages');
+df.plot.scatter(x='displacement', y='acceleration', title='Scatter Plot of displacement and acceleration percentages')
 plt.show()
 
 print("df.corr():        " , df.corr())
 
 print("df.describe():                    " , df.describe())
 
-print(" df['Scores'] :     " , df['Scores'])
-print("  df['Hours']   :    ", df['Hours']   )
+print(" df['displacement'] :     " , df['displacement'])
+print("  df['acceleration']   :    ", df['acceleration']   )
 
-y = df['Scores'].values.reshape(-1, 1)
-X = df['Hours'].values.reshape(-1, 1)
+y = df['displacement'].values.reshape(-1, 1)
+X = df['acceleration'].values.reshape(-1, 1)
 
 print("y :  " , y)
 print("X :   " , X)
 
-print(df['Hours'].values) # [2.5 5.1 3.2 8.5 3.5 1.5 9.2 ... ]
-print(df['Hours'].values.shape) # (25,)
+print(df['acceleration'].values) # [2.5 5.1 3.2 8.5 3.5 1.5 9.2 ... ]
+print(df['acceleration'].values.shape) # (25,)
 
 print(X.shape) # (25, 1)
 print(X)      # [[2.5] [5.1]  [3.2] ... ]
@@ -53,10 +53,10 @@ print(regressor.coef_)
 def calc(slope, intercept, hours):
     return slope*hours+intercept
 
-score = calc(regressor.coef_, regressor.intercept_, 9.5)
-print(score) # [[94.80663482]]
-score = regressor.predict([[9.5]])
-print(score) # 94.80663482
+acceleration = calc(regressor.coef_, regressor.intercept_, 9.5)
+print(acceleration) # [[94.80663482]]
+acceleration = regressor.predict([[9.5]])
+print(acceleration) # 94.80663482
 y_pred = regressor.predict(X_test)
 
 df_preds = pd.DataFrame({'Actual': y_test.squeeze(), 'Predicted': y_pred.squeeze()})
