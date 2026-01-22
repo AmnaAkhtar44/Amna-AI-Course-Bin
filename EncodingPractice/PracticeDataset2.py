@@ -1,8 +1,9 @@
+
 import pandas as pd
 import numpy as np
 import sklearn.preprocessing
 
-df = pd.read_csv('Amna-AI-Course-Bin/advertising.csv')
+df = pd.read_csv('Amna-AI-Course-Bin/auto-mpg[1].csv')
 print(df.head())
 
 from sklearn.preprocessing import LabelEncoder
@@ -13,6 +14,7 @@ df['class_encoded'] = le.fit_transform(df['class'])
 
 print("Class labels mapping:", dict(zip(le.classes_, le.transform(le.classes_))))
 print(df[['class', 'class_encoded']].head())
+
 from sklearn.preprocessing import OneHotEncoder
 
 categorical_cols = ['buying', 'maint',
@@ -57,11 +59,8 @@ X = df[features]
 X_prepared = preprocessor.fit_transform(X)
 
 print("Transformed shape:", X_prepared.shape)
-
 final_df = pd.DataFrame(
     np.hstack([X_prepared, df[['class_encoded']].values]),
     columns = list(preprocessor.get_feature_names_out()) + ['class_encoded']
 )
 print(final_df.head())
-
-

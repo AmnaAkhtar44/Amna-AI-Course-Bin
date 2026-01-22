@@ -10,10 +10,10 @@ import pandas as pd
 import numpy as np
 import sklearn.preprocessing
 
-df = pd.read_csv('Week4/EncodingCategoricalData.csv')
+df = pd.read_csv('Week8/EncodingCategoricalData.csv')
 print(df.head())
 
-""""
+"""" 
 Step 2: Label Encoding
 Here we will use Label encoding converts each category into a unique integer, making it suitable for ordinal data or when models need numeric input.
 
