@@ -4,6 +4,17 @@ import numpy as np
 
 #Let's read the CSV file and package it into a DataFrame:
 df = pd.read_csv('Amna-AI-Course-Bin/insurance[1].csv')
+# Step 3: Encode categorical columns using one-hot encoding
+df_encoded = pd.get_dummies(df, columns=['sex', 'smoker', 'region'], drop_first=True)
+# drop_first=True avoids dummy variable trap
+
+# Step 4: Define Features (X) and Target (y)
+X = df_encoded.drop(columns=['charges'])
+y = df_encoded['charges']
+
+# Step 5: Optional - correlation on numeric data
+print("Correlation matrix (numeric columns only):\n", X.join(y).corr())
+
 
 #Once the data is loaded in, let's take a quick peek at the first 5 values using the head() method:
 print(df.head())
@@ -12,10 +23,10 @@ print(df.head())
 print("df.shape:         " , df.shape)
 
 #So, what's the relationship between these variables? A great way to explore relationships between variables is through Scatter plots. We'll plot the hours on the X-axis and scores on the Y-axis, and for each pair, a marker will be positioned based on their values:
-df.plot.scatter(x='age', y='charges', title='Scatter Plot of age and charges percentages');
+df.plot.scatter(x='age', y='charges', title='Scatter Plot of age and charges percentages')
 plt.show()
 
-print("df.corr():        " , df.corr())
+#print("df.corr():        " , df.corr())
 
 print("df.describe():                    " , df.describe())
 

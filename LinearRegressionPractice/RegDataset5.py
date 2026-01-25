@@ -4,6 +4,16 @@ import numpy as np
 
 #Let's read the CSV file and package it into a DataFrame:
 df = pd.read_csv('Amna-AI-Course-Bin/Fish[1].csv')
+# Step 3: Handle categorical column 'Species' using one-hot encoding
+df_encoded = pd.get_dummies(df, columns=['Species'])
+
+# Step 4: Define Features (X) and Target (y)
+X = df_encoded.drop(columns=['Weight'])  # all columns except Weight
+y = df_encoded['Weight']                 # target variable
+
+# Step 5: Optional - check correlation (numeric only)
+print("Correlation matrix (numeric columns only):\n", X.join(y).corr())
+
 
 #Once the data is loaded in, let's take a quick peek at the first 5 values using the head() method:
 print(df.head())
@@ -12,10 +22,10 @@ print(df.head())
 print("df.shape:         " , df.shape)
 
 #So, what's the relationship between these variables? A great way to explore relationships between variables is through Scatter plots. We'll plot the hours on the X-axis and scores on the Y-axis, and for each pair, a marker will be positioned based on their values:
-df.plot.scatter(x='Weight', y='Height', title='Scatter Plot of Weight and Height percentages');
+df.plot.scatter(x='Weight', y='Height', title='Scatter Plot of Weight and Height percentages')
 plt.show()
 
-print("df.corr():        " , df.corr())
+#print("df.corr():        " , df.corr())
 
 print("df.describe():                    " , df.describe())
 

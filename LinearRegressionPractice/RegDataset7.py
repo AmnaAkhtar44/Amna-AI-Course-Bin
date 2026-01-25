@@ -8,7 +8,7 @@ df = pd.read_csv('Amna-AI-Course-Bin/housing[1].csv')
 #Once the data is loaded in, let's take a quick peek at the first 5 values using the head() method:
 print(df.head())
 
-#We can also check the shape of our dataset via the shape property:
+#We canl5   also check the shape of our dataset via the shape property:
 print("df.shape:         " , df.shape)
 
 #So, what's the relationship between these variables? A great way to explore relationships between variables is through Scatter plots. We'll plot the hours on the X-axis and scores on the Y-axis, and for each pair, a marker will be positioned based on their values:

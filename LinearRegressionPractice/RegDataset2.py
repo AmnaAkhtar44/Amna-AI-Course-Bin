@@ -3,33 +3,39 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #Let's read the CSV file and package it into a DataFrame:
-df = pd.read_csv('Amna-AI-Course-Bin/Boston.csv')
+# Load dataset
+df = pd.read_csv("Amna-AI-Course-Bin/auto-mpg[1].csv", na_values='?')
 
-#Once the data is loaded in, let's take a quick peek at the first 5 values using the head() method:
-print(df.head())
+# Remove non-numeric column
+df = df.drop(columns=['car name'])
 
-#We can also check the shape of our dataset via the shape property:
-print("df.shape:         " , df.shape)
+# Convert to numeric
+df = df.apply(pd.to_numeric, errors='coerce')
+
+# Handle missing values
+df = df.dropna()
+
+# Correlation
+print(df.corr())
 
 #So, what's the relationship between these variables? A great way to explore relationships between variables is through Scatter plots. We'll plot the hours on the X-axis and scores on the Y-axis, and for each pair, a marker will be positioned based on their values:
-df.plot.scatter(x='indus', y='tax', title='Scatter Plot of indus and tax percentages');
+df.plot.scatter(x='weight', y='mpg', title='Scatter Plot of indus and tax percentages')
 plt.show()
-
-print("df.corr():        " , df.corr())
+#print('df.shape():' , df.shape())
 
 print("df.describe():                    " , df.describe())
 
-print(" df['indus'] :     " , df['indus'])
-print("  df['tax']   :    ", df['tax']   )
+print(" df['weight'] :     " , df['weight'])
+print("  df['mpg']   :    ", df['mpg']   )
 
-y = df['indus'].values.reshape(-1, 1)
-X = df['tax'].values.reshape(-1, 1)
+y = df['mpg'].values.reshape(-1, 1)
+X = df['weight'].values.reshape(-1, 1)
 
 print("y :  " , y)
 print("X :   " , X)
 
-print(df['indus'].values) # [2.5 5.1 3.2 8.5 3.5 1.5 9.2 ... ]
-print(df['indus'].values.shape) # (25,)
+print(df['weight'].values) # [2.5 5.1 3.2 8.5 3.5 1.5 9.2 ... ]
+print(df['weight'].values.shape) # (25,)
 
 print(X.shape) # (25, 1)
 print(X)      # [[2.5] [5.1]  [3.2] ... ]
@@ -53,10 +59,10 @@ print(regressor.coef_)
 def calc(slope, intercept, hours):
     return slope*hours+intercept
 
-tax = calc(regressor.coef_, regressor.intercept_, 9.5)
-print(tax) # [[94.80663482]]
-tax = regressor.predict([[9.5]])
-print(tax) # 94.80663482
+weight = calc(regressor.coef_, regressor.intercept_, 9.5)
+print(weight) # [[94.80663482]]
+weight = regressor.predict([[9.5]])
+print(weight) # 94.80663482
 y_pred = regressor.predict(X_test)
 
 df_preds = pd.DataFrame({'Actual': y_test.squeeze(), 'Predicted': y_pred.squeeze()})
