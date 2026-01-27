@@ -1,4 +1,4 @@
-import pandas as pd
+is code k according new code generate kr k dein                   import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 

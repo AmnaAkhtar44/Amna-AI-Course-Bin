@@ -2,74 +2,89 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-#Let's read the CSV file and package it into a DataFrame:
+# Step 1: Read CSV file
 df = pd.read_csv('Amna-AI-Course-Bin/housing[1].csv')
 
-#Once the data is loaded in, let's take a quick peek at the first 5 values using the head() method:
+# Step 2: Convert categorical column to numeric
+df = pd.get_dummies(df, columns=['ocean_proximity'], drop_first=True)
+
+# Step 3: Convert all columns to numeric (safety)
+df = df.apply(pd.to_numeric, errors='coerce')
+
+# Step 4: Handle missing values
+df = df.dropna()
+
+# Step 5: Define Features (X) and Target (y)
+X = df[['median_income']]     # SIMPLE LINEAR REGRESSION
+y = df['median_house_value']
+
+# Step 6: Peek data
 print(df.head())
+print("df.shape:         ", df.shape)
 
-#We canl5   also check the shape of our dataset via the shape property:
-print("df.shape:         " , df.shape)
-
-#So, what's the relationship between these variables? A great way to explore relationships between variables is through Scatter plots. We'll plot the hours on the X-axis and scores on the Y-axis, and for each pair, a marker will be positioned based on their values:
-df.plot.scatter(x='latitude', y='median_income', title='Scatter Plot of latitude and median_income percentages');
+# Step 7: Scatter plot
+df.plot.scatter(
+    x='median_income',
+    y='median_house_value',
+    title='Scatter Plot of Median Income vs Median House Value'
+)
 plt.show()
 
-print("df.corr():        " , df.corr())
+# Step 8: Correlation & description
+print("df.corr():        ", df.corr())
+print("df.describe():    ", df.describe())
 
-print("df.describe():                    " , df.describe())
+print("df['median_house_value']:", df['median_house_value'])
 
-print(" df['median_income'] :     " , df['median_income'])
-print("  df['latitude']   :    ", df['latitude']   )
+# Step 9: Convert to numpy arrays
+X = X.values.reshape(-1, 1)
+y = y.values.reshape(-1, 1)
 
-y = df['median_income'].values.reshape(-1, 1)
-X = df['latitude'].values.reshape(-1, 1)
-
-print("y :  " , y)
-print("X :   " , X)
-
-print(df['latitude'].values) # [2.5 5.1 3.2 8.5 3.5 1.5 9.2 ... ]
-print(df['latitude'].values.shape) # (25,)
-
-print(X.shape) # (25, 1)
-print(X)      # [[2.5] [5.1]  [3.2] ... ]
+print("X shape:", X.shape)
+print("y shape:", y.shape)
 
 SEED = 42
 
+# Step 10: Train-test split
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = SEED)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=SEED
+)
 
-#Now, if you print your X_train array - you'll find the study hours, and y_train contains the score percentages:
+print(X_train)
+print(y_train)
 
-print(X_train) # [[2.7] [3.3] [5.1] [3.8] ... ]
-print(y_train) # [[25] [42] [47] [35] ... ]
-
+# Step 11: Train Linear Regression model
 from sklearn.linear_model import LinearRegression
 regressor = LinearRegression()
 regressor.fit(X_train, y_train)
-print(regressor.intercept_)
-print(regressor.coef_)
 
-def calc(slope, intercept, hours):
-    return slope*hours+intercept
+print("Intercept:", regressor.intercept_)
+print("Coefficient:", regressor.coef_)
 
-median_income = calc(regressor.coef_, regressor.intercept_, 9.5)
-print(median_income) # [[94.80663482]]
-median_income = regressor.predict([[9.5]])
-print(median_income) # 94.80663482
+# Step 12: Manual prediction function
+def calc(slope, intercept, income):
+    return slope * income + intercept
+
+predicted_value = calc(regressor.coef_, regressor.intercept_, 5.0)
+print("Predicted house value for median_income=5:", predicted_value)
+
+# Step 13: Predictions on test data
 y_pred = regressor.predict(X_test)
 
-df_preds = pd.DataFrame({'Actual': y_test.squeeze(), 'Predicted': y_pred.squeeze()})
+df_preds = pd.DataFrame({
+    'Actual': y_test.squeeze(),
+    'Predicted': y_pred.squeeze()
+})
 print(df_preds)
-from sklearn.metrics import mean_absolute_error, mean_squared_error,r2_score
 
-import numpy as np
+# Step 14: Model evaluation
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 mae = mean_absolute_error(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
 rmse = np.sqrt(mse)
 r2 = r2_score(y_test, y_pred)
-#We will also print the metrics results using the f string and the 2 digit precision after the comma with :.2f:
 
 print(f'Mean absolute error: {mae:.2f}')
 print(f'Mean squared error: {mse:.2f}')
