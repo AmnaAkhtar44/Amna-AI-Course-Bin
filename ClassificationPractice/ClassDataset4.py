@@ -2,16 +2,20 @@
 # Import required libraries
 # =====================================
 import pandas as pd
-
+import numpy as np
 
 # =====================================
 # Load CSV dataset
 # =====================================
-dataset = pd.read_csv("Amna-AI-Course-Bin\product+classification+and+clustering\pricerunner_aggregate.csv" )   # <-- change path if needed
+dataset = pd.read_csv(
+    "Amna-AI-Course-Bin/product+classification+and+clustering/pricerunner_aggregate.csv"
+)
 
-print("Dataset Head:")
-print(dataset.head())
+# Fix column spacing issue (VERY IMPORTANT)
+dataset.columns = dataset.columns.str.strip()
 
+print("Columns in Dataset:")
+print(dataset.columns)
 
 # =====================================
 # Select required columns
@@ -21,51 +25,36 @@ dataset = dataset[['Category Label', 'Merchant ID']]
 print("\nDataset Info:")
 print(dataset.info())
 
-
 # =====================================
 # Handle missing values
 # =====================================
 dataset.dropna(inplace=True)
 
-
 # =====================================
-# Take preview
+# Features (X) and Target (y)
 # =====================================
-print("\nDataset Head:")
-print(dataset.head())
+X = dataset['Category Label']   # TEXT feature
+y = dataset['Merchant ID']      # Numeric label
 
-print("\nDataset Tail:")
-print(dataset.tail())
-
-
-# =====================================
-# Split data into features and label
-# =====================================
-X = dataset['Category Label'].copy()     # Feature (TEXT)
-y = dataset['Merchant ID'].copy()    # Target (1–5)
-
-print("\nX (Category Label):")
+print("\nX sample:")
 print(X.head())
 
-print("\ny (Merchant ID):")
+print("\ny sample:")
 print(y.head())
 
-
 # =====================================
-# Convert TEXT into numerical form
+# Convert TEXT → NUMERIC (TF-IDF)
 # =====================================
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 vectorizer = TfidfVectorizer(
     stop_words='english',
-    max_features=5000
+    max_features=3000
 )
 
 X_vectorized = vectorizer.fit_transform(X)
 
-print("\nText converted to numeric matrix")
-print("Shape:", X_vectorized.shape)
-
+print("\nTF-IDF Shape:", X_vectorized.shape)
 
 # =====================================
 # Train-Test Split
@@ -75,58 +64,44 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(
     X_vectorized,
     y,
-    train_size=0.7,
-    random_state=25
+    test_size=0.3,
+    random_state=42
 )
 
-print(f"\nTrain size: {round(X_train.shape[0] / X_vectorized.shape[0] * 100)}%")
-print(f"Test size: {round(X_test.shape[0] / X_vectorized.shape[0] * 100)}%")
-
-
+print("\nTraining samples:", X_train.shape[0])
+print("Testing samples:", X_test.shape[0])
 
 # =====================================
-# Import ML models
+# Import ML Models
 # =====================================
 from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
+# =====================================
+# Initialize Models
+# =====================================
+log_reg = LogisticRegression(max_iter=1000)
+tree = DecisionTreeClassifier(random_state=42)
 
 # =====================================
-# Instantiate models
+# Train Models
 # =====================================
-logistic_regression = LogisticRegression(max_iter=1000)
-svm = SVC()
-tree = DecisionTreeClassifier(random_state=25)
-
-
-# =====================================
-# Train models
-# =====================================
-logistic_regression.fit(X_train, y_train)
-svm.fit(X_train, y_train)
+log_reg.fit(X_train, y_train)
 tree.fit(X_train, y_train)
 
-
 # =====================================
-# Make predictions
+# Predictions
 # =====================================
-log_reg_preds = logistic_regression.predict(X_test)
-svm_preds = svm.predict(X_test)
+log_reg_preds = log_reg.predict(X_test)
 tree_preds = tree.predict(X_test)
 
-
 # =====================================
-# Model Evaluation
+# Evaluation
 # =====================================
 from sklearn.metrics import classification_report
 
-model_preds = {
-    "Logistic Regression": log_reg_preds,
-    "Support Vector Machine": svm_preds,
-    "Decision Tree": tree_preds
-}
+print("\n===== Logistic Regression Results =====")
+print(classification_report(y_test, log_reg_preds))
 
-for model, preds in model_preds.items():
-    print(f"\n{model} Results:")
-    print(classification_report(y_test, preds))
+print("\n===== Decision Tree Results =====")
+print(classification_report(y_test, tree_preds))

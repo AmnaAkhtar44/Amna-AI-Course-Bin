@@ -1,132 +1,47 @@
-# =====================================
-# Import required libraries
-# =====================================
 import pandas as pd
-
-
-# =====================================
-# Load CSV dataset
-# =====================================
-dataset = pd.read_csv("Amna-AI-Course-Bin/multivariate+gait+data/gait.csv" , delimiter = ',')   # <-- change path if needed
-
-print("Dataset Head:")
-print(dataset.head())
-
-
-# =====================================
-# Select required columns
-# =====================================
-dataset = dataset[['condition', 'angle']]
-
-print("\nDataset Info:")
-print(dataset.info())
-
-
-# =====================================
-# Handle missing values
-# =====================================
-dataset.dropna(inplace=True)
-
-
-# =====================================
-# Take preview
-# =====================================
-print("\nDataset Head:")
-print(dataset.head())
-
-print("\nDataset Tail:")
-print(dataset.tail())
-
-
-# =====================================
-# Split data into features and label
-# =====================================
-X = dataset['condition'].copy()     # Feature (TEXT)
-y = dataset['angle'].copy()    # Target (1–5)
-
-print("\nX (condition):")
-print(X.head())
-
-print("\ny (angle):")
-print(y.head())
-
-
-# =====================================
-# Convert TEXT into numerical form
-# =====================================
-#from sklearn.feature_extraction.text import TfidfVectorizer
-
-"""vectorizer = TfidfVectorizer(
-    stop_words='english',
-    max_features=5000
-)
-
-X_vectorized = vectorizer.fit_transform(X)
-
-print("\nText converted to numeric matrix")
-print("Shape:", X_vectorized.shape)"""
-
-
-# =====================================
-# Train-Test Split
-# =====================================
 from sklearn.model_selection import train_test_split
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X,
-    y,
-    train_size=0.7,
-    random_state=25
-)
-
-print(f"\nTrain size: {round(X_train.shape[0] / X.shape[0] * 100)}%")
-print(f"Test size: {round(X_test.shape[0] / X.shape[0] * 100)}%")
-
-
-
-# =====================================
-# Import ML models
-# =====================================
+from sklearn.preprocessing import KBinsDiscretizer
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import classification_report
 
+# Load dataset
+dataset = pd.read_csv("Amna-AI-Course-Bin/multivariate+gait+data/gait.csv")
+dataset.dropna(inplace=True)
 
-# =====================================
-# Instantiate models
-# =====================================
+# Features
+X = dataset[['subject','condition','replication','leg','joint','time']]
+
+# Target (categorical) -> bin angles into 3 classes
+kb = KBinsDiscretizer(n_bins=3, encode='ordinal', strategy='quantile')
+y = kb.fit_transform(dataset[['angle']]).astype(int).ravel()  # 0,1,2
+
+print("Class distribution:", pd.Series(y).value_counts())
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Models
 logistic_regression = LogisticRegression(max_iter=1000)
 svm = SVC()
-tree = DecisionTreeClassifier(random_state=25)
+tree = DecisionTreeClassifier(random_state=42)
 
-
-# =====================================
 # Train models
-# =====================================
 logistic_regression.fit(X_train, y_train)
 svm.fit(X_train, y_train)
 tree.fit(X_train, y_train)
 
-
-# =====================================
-# Make predictions
-# =====================================
-log_reg_preds = logistic_regression.predict(X_test)
-svm_preds = svm.predict(X_test)
-tree_preds = tree.predict(X_test)
-
-
-# =====================================
-# Model Evaluation
-# =====================================
-from sklearn.metrics import classification_report
-
-model_preds = {
-    "Logistic Regression": log_reg_preds,
-    "Support Vector Machine": svm_preds,
-    "Decision Tree": tree_preds
+# Predictions
+models = {
+    "Logistic Regression": logistic_regression,
+    "SVM": svm,
+    "Decision Tree": tree
 }
 
-for model, preds in model_preds.items():
-    print(f"\n{model} Results:")
+for name, model in models.items():
+    preds = model.predict(X_test)
+    print(f"\n{name} Classification Report:")
     print(classification_report(y_test, preds))
