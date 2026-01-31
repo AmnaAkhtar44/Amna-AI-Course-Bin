@@ -62,7 +62,7 @@ print("  df['Hours']   :    ", df['Hours']   )
 
 """To separate the target and features, we can attribute the dataframe column values to our y and X variables:"""
 #The .reshape() method takes in two arguments: the first is the number of columns you want the dataframe to have, and the second is the number of rows you want the dataframe to have.
-y = df['Scores'].values.reshape(-1, 1)
+y = df['Scores'].values.reshape(-1, 1)  # sk learn requires 2D arrays , -1---> Automatically infer rows , +1---> one feature column
 X = df['Hours'].values.reshape(-1, 1)
   
 
@@ -107,21 +107,21 @@ regressor = LinearRegression()
 
 regressor.fit(X_train, y_train)
 #If no errors are thrown - the regressor found the best fitting line! The line is defined by our features and the intercept/slope. In fact, we can inspect the intercept and slope by printing the regressor.intecept_ and regressor.coef_ attributes, respectively:
-
+# Model parameters
 print(regressor.intercept_)
 
 #For retrieving the slope (which is also the coefficient of x):
 
 print(regressor.coef_)
-
+# intercept is b , coef is a
 """
 Making Predictions
 To avoid running calculations ourselves, we could write our own formula that calculates the value:
 """
 def calc(slope, intercept, hours):
-    return slope*hours+intercept
+    return slope*hours+intercept          # y = a*x + b   , b is intercept , a is coef(slope) , x is hour , y is score
 
-score = calc(regressor.coef_, regressor.intercept_, 9.5)
+score = calc(regressor.coef_, regressor.intercept_, 9.5) # 9.5 ..> 9 sample , 5 feature
 print(score) # [[94.80663482]]
 
 #However - a much handier way to predict new values using our model is to call on the predict() function:
@@ -164,7 +164,17 @@ rmse = np.sqrt(mse)
 r2 = r2_score(y_test, y_pred)
 #We will also print the metrics results using the f string and the 2 digit precision after the comma with :.2f:
 
-print(f'Mean absolute error: {mae:.2f}')
-print(f'Mean squared error: {mse:.2f}')
-print(f'Root mean squared error: {rmse:.2f}')
-print(f'R2 Score: {r2:.2f}')
+print(f'Mean absolute error: {mae:.2f}') ,  # Average absolute diff , easy to interpret , lower = better
+print(f'Mean squared error: {mse:.2f}')   , # penalizes large errors more , sensitive to outliers
+print(f'Root mean squared error: {rmse:.2f}')  , # same units as targets , most commonly reported regression metric
+print(f'R2 Score: {r2:.2f}')  , # Range--> 0>1 , measures variance explained by model , higher = better
+ # low mae/rmae= accurate prediction , high R2 = model explains most variance
+
+
+ """1 This is a supervised regression problem
+    2 uses linear Regression
+    3 requires 2D features Arrays
+    4 model learn slope and intercept
+    5 performance evaluated using mae, mse, rmae , r2
+    6 suitable only for continuous outputs
+ """

@@ -42,6 +42,8 @@ for var in variables:
     plt.show()
 
 read = input("Wait here: \n")
+# Regression plot---> visualize relationship btw each feature and target , line shows best fit linear trend , we can detect:
+# positive / negative correlations , outliers , non - linear patterns 
 
 
 plt.figure()
@@ -67,7 +69,7 @@ SEED = 200
 #After setting our X and y sets, we can divide our data into train and test sets. We will be using the same seed and 20% of our data for training:
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, 
-                                                    test_size=0.2, 
+                                                    test_size=0.2,  # 0.2 means 20% testing 805 training data
                                                     random_state=SEED)
 
 #After splitting the data, we can train our multiple regression model. Notice that now there is no need to reshape our X data, once it already has more than one dimension:
@@ -82,10 +84,10 @@ regressor = LinearRegression()
 regressor.fit(X_train, y_train)
 
 #After fitting the model and finding our optimal solution, we can also look at the intercept:
-print("regressor.intercept_......\n", regressor.intercept_)
+print("regressor.intercept_......\n", regressor.intercept_)  # intercept--> value of petrol consumption when all features are 0
 
 #And at the coefficients of the features
-print("regressor.coef_ " , regressor.coef_)
+print("regressor.coef_ " , regressor.coef_)   # coef--> impact of 1 unit increase in a feature on petrol consumption , holding others constant.
 
 
 """feature_names = X.columns
@@ -103,6 +105,8 @@ coefficients_df = pd.DataFrame(data = model_coefficients,
                               index = feature_names, 
                               columns = ['Coefficient value'])
 print(coefficients_df)
+
+# helps visualize which features contributes most , useful for feature importance Analysis
 
 
 #In the same way we had done for the simple regression model, let's predict with the test data:
@@ -151,3 +155,7 @@ print(" R2 also comes implemented by default into the score method of Scikit-Lea
 
 
 
+"""
+1. Multiple features--> X has more than 1 column
+2. coeffs represent partial effects of features
+3. corr analysis is more imp to avoid multicollinearity """
