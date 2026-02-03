@@ -280,7 +280,7 @@ https://www.geeksforgeeks.org/epoch-in-machine-learning/
 https://nulldog.com/tensorflow-epochs-vs-steps-key-differences-explained
 
 """
-print("model.fit(x_train,y_train , epochs=5) :         \n" , model.fit(x_train,y_train , epochs=3 , batch_size=20 ))
+print("model.fit(x_train,y_train , epochs=5) :         \n" , model.fit(x_train,y_train , epochs=3 , batch_size=20 )) # epoch is no. of cycles for training...batch size depends on size of data
 
 
 

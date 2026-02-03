@@ -16,14 +16,14 @@ print("df.describe().round(2).T:    \n",df.describe().round(2).T)
 
 import seaborn as sns # Convention alias for Seaborn
 
-variables = ['Petrol_tax', 'Average_income', 'Paved_Highways','Population_Driver_licence(%)']
+variables = ['TV','Radio','Newspaper','Sales']
 
 for var in variables:
     plt.figure() # Creating a rectangle (figure) for each plot
     # Regression Plot also by default includes
     # best-fitting regression line
     # which can be turned off via `fit_reg=False`
-    sns.regplot(x=var, y='Petrol_Consumption', data=df).set(title=f'Regression plot of {var} and Petrol Consumption');
+    sns.regplot(x=var, y='Sales', data=df).set(title=f'Regression plot of {var} and Sales')
     plt.show()
 
 read = input("Wait here: \n")
@@ -39,9 +39,8 @@ g = sns.heatmap(correlations, annot=True).set(title='Heat map of Consumption Dat
 plt.show()
 read = input("Wait for me....")
 
-y = df['Petrol_Consumption']
-X = df[['Average_income', 'Paved_Highways',
-       'Population_Driver_licence(%)', 'Petrol_tax']]
+y = df['Sales']
+X = df[['TV','Radio','Newspaper','Sales']]
 
 SEED = 200
 #After setting our X and y sets, we can divide our data into train and test sets. We will be using the same seed and 20% of our data for training:
