@@ -123,8 +123,8 @@ def calc(slope, intercept, hours):
 
 score = calc(regressor.coef_, regressor.intercept_, 9.5) # 9.5 ..> 9 sample , 5 feature
 print(score) # [[94.80663482]]
-
 #However - a much handier way to predict new values using our model is to call on the predict() function:
+
 
 # Passing 9.5 in double brackets to have a 2 dimensional array
 score = regressor.predict([[9.5]])
