@@ -4,7 +4,7 @@ import pickle
 import numpy as np
 
 # Load the model
-with open(r"C:\\Users\\ORACLE\\OneDrive\\Documents\\GitHub\\Amna-AI-Course-Bin\\Week18\\predictive_maintenance_model.pkl") as f:
+with open("Amna-AI-Course-Bin//Week18//predictive_maintenance_model.pkl" , "rb") as f:
  model = pickle.load(f)
 
 # Initialize FastAPI app
