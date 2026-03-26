@@ -3,7 +3,7 @@ import pandas as pd
 
 #  Read csv file to DataFrame
 #  Reference: https://pandas.pydata.org/docs/dev/reference/api/pandas.read_csv.html
-#  Note below, date formatting - In Pandas, DateTime is a data type that represents a single point in time. It is especially useful when dealing with time-series data like stock prices, weather records, economic indicators etc.
+#  Note below, date formatting - In Pandas, DateTime is a data type that represents a single point in time. It is especially useful when dealing with time-series data like stock prices, weather records, economic indicatozrs etc.
 df = pd.read_csv(r'Amna-AI-Course-Bin/Week4/zameencom-property-data-By-Kaggle-Short.csv',delimiter=";",parse_dates=[14], date_format={'date_added': '%d-%m-%Y'})
 
 print(df)
