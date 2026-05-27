@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Amna Akhtar — Data Scientist & AI/ML Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0a1628;
+    --navy2: #112240;
+    --teal: #0ea5e9;
+    --teal-soft: #38bdf8;
+    --gold: #f59e0b;
+    --white: #f8fafc;
+    --muted: #94a3b8;
+    --card-bg: #111d30;
+    --border: rgba(14,165,233,0.18);
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 4rem;
+    background: rgba(10,22,40,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--teal);
+    letter-spacing: 0.01em;
+  }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 7rem 4rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(14,165,233,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,165,233,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .hero-glow {
+    position: absolute; top: -10rem; right: -8rem;
+    width: 55rem; height: 55rem; border-radius: 50%;
+    background: radial-gradient(circle, rgba(14,165,233,0.10) 0%, transparent 65%);
+    z-index: 0;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 740px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(14,165,233,0.12);
+    border: 1px solid rgba(14,165,233,0.3);
+    color: var(--teal-soft); border-radius: 2rem;
+    padding: 0.35rem 1rem; font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.04em; margin-bottom: 1.6rem;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6vw, 4.4rem);
+    font-weight: 700; line-height: 1.12;
+    color: #e2e8f0; margin-bottom: 0.4rem;
+  }
+  .hero h1 span { color: var(--teal); }
+  .hero-role {
+    font-size: 1.15rem; font-weight: 300; color: var(--muted);
+    margin-bottom: 1.6rem; letter-spacing: 0.01em;
+  }
+  .hero-desc {
+    font-size: 1.02rem; color: #94a3b8; max-width: 580px;
+    line-height: 1.8; margin-bottom: 2.4rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal); color: var(--navy);
+    border: none; padding: 0.85rem 2.2rem;
+    border-radius: 0.4rem; font-weight: 600; font-size: 0.92rem;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { background: var(--teal-soft); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--teal);
+    border: 1px solid var(--teal); padding: 0.85rem 2.2rem;
+    border-radius: 0.4rem; font-weight: 500; font-size: 0.92rem;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .btn-outline:hover { background: rgba(14,165,233,0.1); transform: translateY(-2px); }
+  .hero-social { display: flex; gap: 1.2rem; margin-top: 2.2rem; }
+  .hero-social a {
+    color: var(--muted); font-size: 0.85rem; text-decoration: none;
+    display: flex; align-items: center; gap: 0.4rem;
+    transition: color 0.2s;
+  }
+  .hero-social a:hover { color: var(--teal); }
+  .social-icon {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    background: var(--card-bg); font-size: 0.75rem; font-weight: 700;
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+    font-weight: 700; color: #e2e8f0; margin-bottom: 1rem;
+  }
+  .section-divider {
+    width: 48px; height: 3px;
+    background: linear-gradient(90deg, var(--teal), transparent);
+    margin-bottom: 3rem; border-radius: 2px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: start;
+  }
+  .about-text p { color: #94a3b8; margin-bottom: 1rem; font-size: 0.98rem; }
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 0.7rem; padding: 1.5rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2.2rem; font-weight: 700;
+    color: var(--teal); display: block;
+  }
+  .stat-label { font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* SKILLS */
+  #skills { background: var(--navy2); }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 0.8rem; padding: 1.6rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+  .skill-card-head {
+    display: flex; align-items: center; gap: 0.7rem;
+    margin-bottom: 1.2rem;
+  }
+  .skill-icon {
+    width: 38px; height: 38px; border-radius: 0.5rem;
+    background: rgba(14,165,233,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .skill-card-head h3 { font-size: 0.95rem; font-weight: 600; color: #e2e8f0; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    background: rgba(14,165,233,0.08);
+    border: 1px solid rgba(14,165,233,0.2);
+    color: var(--teal-soft);
+    font-size: 0.76rem; font-weight: 500; padding: 0.28rem 0.7rem;
+    border-radius: 1rem; letter-spacing: 0.02em;
+  }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0.6rem; bottom: 0.6rem;
+    width: 2px; background: linear-gradient(to bottom, var(--teal), transparent);
+  }
+  .tl-item { position: relative; margin-bottom: 3rem; }
+  .tl-dot {
+    position: absolute; left: -2.38rem; top: 0.55rem;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--teal); border: 3px solid var(--navy);
+    box-shadow: 0 0 0 3px rgba(14,165,233,0.3);
+  }
+  .tl-date {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 0.3rem;
+  }
+  .tl-role {
+    font-family: var(--font-display);
+    font-size: 1.2rem; font-weight: 600; color: #e2e8f0;
+    margin-bottom: 0.15rem;
+  }
+  .tl-org { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.9rem; }
+  .tl-bullets { list-style: none; }
+  .tl-bullets li {
+    font-size: 0.9rem; color: #94a3b8; padding: 0.25rem 0;
+    padding-left: 1.1rem; position: relative;
+  }
+  .tl-bullets li::before {
+    content: '▸'; position: absolute; left: 0;
+    color: var(--teal); font-size: 0.7rem; top: 0.35rem;
+  }
+
+  /* PROJECTS */
+  #projects { background: var(--navy2); }
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 0.8rem; padding: 1.8rem;
+    display: flex; flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .project-card:hover { border-color: var(--teal); transform: translateY(-4px); }
+  .project-type {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.7rem;
+  }
+  .project-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem; font-weight: 600;
+    color: #e2e8f0; margin-bottom: 0.7rem;
+  }
+  .project-desc { font-size: 0.88rem; color: #94a3b8; flex: 1; margin-bottom: 1.2rem; }
+  .project-techs { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .p-tech {
+    background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25);
+    color: #fbbf24; font-size: 0.72rem; font-weight: 500;
+    padding: 0.22rem 0.6rem; border-radius: 0.8rem;
+  }
+
+  /* EDUCATION */
+  .edu-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .edu-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 0.8rem; padding: 1.8rem;
+    border-left: 3px solid var(--teal);
+  }
+  .edu-degree { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: #e2e8f0; margin-bottom: 0.3rem; }
+  .edu-school { font-size: 0.9rem; color: var(--teal-soft); margin-bottom: 0.3rem; }
+  .edu-year { font-size: 0.82rem; color: var(--muted); }
+  .edu-grade { display: inline-block; margin-top: 0.6rem; background: rgba(14,165,233,0.1); border: 1px solid var(--border); color: var(--teal-soft); font-size: 0.78rem; font-weight: 600; padding: 0.22rem 0.7rem; border-radius: 1rem; }
+
+  /* CERT */
+  .cert-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 0.8rem; padding: 1.5rem 1.8rem;
+    display: flex; align-items: center; gap: 1.2rem;
+    max-width: 500px;
+  }
+  .cert-badge {
+    width: 48px; height: 48px; flex-shrink: 0;
+    border-radius: 50%; background: rgba(14,165,233,0.12);
+    border: 2px solid var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+  .cert-title { font-size: 1rem; font-weight: 600; color: #e2e8f0; }
+  .cert-issuer { font-size: 0.85rem; color: var(--teal-soft); }
+  .cert-date { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* CONTACT */
+  #contact { background: var(--navy2); }
+  .contact-inner {
+    max-width: 660px;
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 1.2rem; padding: 3rem;
+    text-align: center;
+  }
+  .contact-inner p { color: var(--muted); margin-bottom: 2rem; font-size: 0.96rem; }
+  .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: rgba(14,165,233,0.07);
+    border: 1px solid var(--border); border-radius: 0.5rem;
+    padding: 0.7rem 1.4rem; color: var(--teal-soft);
+    text-decoration: none; font-size: 0.88rem; font-weight: 500;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .contact-link:hover { background: rgba(14,165,233,0.15); border-color: var(--teal); }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 0.82rem;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-inner { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AA</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:amnaakhtar1409@gmail.com" class="btn-primary" style="font-size:0.82rem; padding:0.6rem 1.4rem;">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Open to Internships &amp; Entry-Level Roles</div>
+    <h1>Amna<br/><span>Akhtar</span></h1>
+    <p class="hero-role">Data Scientist &nbsp;·&nbsp; AI/ML Developer &nbsp;·&nbsp; Full-Stack Engineer &nbsp;·&nbsp; SEO</p>
+    <p class="hero-desc">
+      Final-year BSCS student (CGPA 3.3) passionate about turning raw data into actionable insights and building intelligent, full-stack applications. Skilled in Python, TensorFlow, React, and Node.js — with hands-on training at Nexskill &amp; Corvit.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-social">
+      <a href="https://github.com/AmnaAkhtar44" target="_blank">
+        <div class="social-icon">GH</div> GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/amna-akhtar-534b43334/" target="_blank">
+        <div class="social-icon">LI</div> LinkedIn
+      </a>
+      <a href="mailto:amnaakhtar1409@gmail.com">
+        <div class="social-icon">✉</div> Email
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Me</div>
+  <div class="section-title">Who I Am</div>
+  <div class="section-divider"></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a final-year Computer Science student at Govt. Graduate College of Science (Punjab University), maintaining a CGPA of 3.3. My academic journey has been complemented by intensive hands-on training in Data Science, AI/ML, and Full-Stack Web Development.</p>
+      <p>I completed specialized training at <strong style="color:#e2e8f0">Nexskill (Arfa Software Technology Park)</strong> where I worked on real data pipelines and ML models, and at <strong style="color:#e2e8f0">Corvit Network</strong> where I built full-stack applications from design to deployment.</p>
+      <p>I'm drawn to problems at the intersection of data and user experience — using machine learning to solve real-world challenges while delivering polished, responsive interfaces. I'm actively seeking internships or entry-level roles where I can contribute immediately and keep growing.</p>
+      <p>Outside of tech, I enjoy exploring SEO strategies and understanding how to make digital content discoverable and impactful.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <span class="stat-num">3.3</span>
+        <div class="stat-label">Current CGPA</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">8+</span>
+        <div class="stat-label">Projects Built</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">2</span>
+        <div class="stat-label">Training Programs</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">10+</span>
+        <div class="stat-label">Technologies</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical Skills</div>
+  <div class="section-title">What I Work With</div>
+  <div class="section-divider"></div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-head">
+        <div class="skill-icon">🤖</div>
+        <h3>AI / Machine Learning</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Scikit-learn</span>
+        <span class="skill-tag">Linear Regression</span>
+        <span class="skill-tag">Decision Trees</span>
+        <span class="skill-tag">Random Forest</span>
+        <span class="skill-tag">Classification</span>
+        <span class="skill-tag">Regression</span>
+        <span class="skill-tag">Model Evaluation</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-head">
+        <div class="skill-icon">🧠</div>
+        <h3>Deep Learning</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">TensorFlow</span>
+        <span class="skill-tag">Keras</span>
+        <span class="skill-tag">Neural Networks</span>
+        <span class="skill-tag">Basic DL Architectures</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-head">
+        <div class="skill-icon">📊</div>
+        <h3>Data Science</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">EDA</span>
+        <span class="skill-tag">Data Cleaning</span>
+        <span class="skill-tag">Matplotlib</span>
+        <span class="skill-tag">Seaborn</span>
+        <span class="skill-tag">Feature Engineering</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-head">
+        <div class="skill-icon">🌐</div>
+        <h3>Frontend Development</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">JavaScript (ES6)</span>
+        <span class="skill-tag">React.js</span>
+        <span class="skill-tag">Bootstrap</span>
+        <span class="skill-tag">Responsive Design</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-head">
+        <div class="skill-icon">⚙️</div>
+        <h3>Backend Development</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Express.js</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">PostgreSQL</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-head">
+        <div class="skill-icon">🔍</div>
+        <h3>Tools &amp; Other</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git &amp; GitHub</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">SEO</span>
+        <span class="skill-tag">Problem Solving</span>
+        <span class="skill-tag">Team Collaboration</span>
+        <span class="skill-tag">Leadership</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Professional Experience</div>
+  <div class="section-title">My Journey</div>
+  <div class="section-divider"></div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Feb 2026 – May 2026</div>
+      <div class="tl-role">Full-Stack Web Development Trainee</div>
+      <div class="tl-org">Corvit Network — Lahore, Pakistan</div>
+      <ul class="tl-bullets">
+        <li>Built responsive UIs with HTML, CSS, Bootstrap, JavaScript, and React; improved cross-device consistency and usability across multiple projects.</li>
+        <li>Developed RESTful APIs with Node.js and Express, integrating SQL/NoSQL databases to power dynamic application features.</li>
+        <li>Deployed full-stack applications using Git-based workflows, established reproducible CI-friendly deployment routines and improved application stability.</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Oct 2025 – Mar 2026</div>
+      <div class="tl-role">Data Science &amp; AI Trainee</div>
+      <div class="tl-org">Nexskill (Arfa Software Technology Park) — Lahore, Pakistan</div>
+      <ul class="tl-bullets">
+        <li>Cleaned and transformed noisy datasets using NumPy and Pandas, enabling reliable downstream model training and analysis.</li>
+        <li>Implemented and compared Linear Regression, Decision Tree, and Random Forest models using scikit-learn (R², RMSE), documented model selection decisions for reproducibility.</li>
+        <li>Built introductory neural networks with TensorFlow/Keras, practiced version control with Git/GitHub, and used SQL for structured data retrieval.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Projects</div>
+  <div class="section-title">Things I've Built</div>
+  <div class="section-divider"></div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-type">Data Science</div>
+      <div class="project-title">Real Estate USA</div>
+      <p class="project-desc">Analyzed US housing market trends to identify price drivers. Applied data cleaning, EDA, and feature engineering to produce actionable visualizations for pricing model improvements.</p>
+      <div class="project-techs">
+        <span class="p-tech">Python</span><span class="p-tech">Pandas</span><span class="p-tech">Scikit-learn</span><span class="p-tech">Matplotlib</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-type">Machine Learning</div>
+      <div class="project-title">Wine Quality Classifier</div>
+      <p class="project-desc">Built and compared multiple classification models to predict wine quality. Evaluated algorithms and documented model selection decisions to choose the optimal approach.</p>
+      <div class="project-techs">
+        <span class="p-tech">Python</span><span class="p-tech">Scikit-learn</span><span class="p-tech">EDA</span><span class="p-tech">Model Evaluation</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-type">Machine Learning</div>
+      <div class="project-title">Heart Disease &amp; Diabetes Prediction</div>
+      <p class="project-desc">Developed ML classification models to predict heart disease and diabetes outcomes from patient data. Focused on feature selection and model accuracy.</p>
+      <div class="project-techs">
+        <span class="p-tech">Python</span><span class="p-tech">Scikit-learn</span><span class="p-tech">Classification</span><span class="p-tech">Pandas</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-type">Full-Stack App</div>
+      <div class="project-title">Galaxy Website</div>
+      <p class="project-desc">Built a responsive multi-page site with React frontend and Node.js/Express backend to practice client-server integration, state management, and API routing.</p>
+      <div class="project-techs">
+        <span class="p-tech">React.js</span><span class="p-tech">Node.js</span><span class="p-tech">Express</span><span class="p-tech">REST API</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-type">Full-Stack App</div>
+      <div class="project-title">FoodHut</div>
+      <p class="project-desc">A full-stack food ordering application featuring dynamic menus, backend order management, and a clean responsive interface built with React and Node.js.</p>
+      <div class="project-techs">
+        <span class="p-tech">React.js</span><span class="p-tech">Node.js</span><span class="p-tech">Express</span><span class="p-tech">MongoDB</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-type">Data Science</div>
+      <div class="project-title">Fast Food &amp; Advertising Analysis</div>
+      <p class="project-desc">Exploratory data analysis of fast food nutritional data and advertising spend datasets, producing insights through visualizations and statistical summaries.</p>
+      <div class="project-techs">
+        <span class="p-tech">Python</span><span class="p-tech">Seaborn</span><span class="p-tech">Matplotlib</span><span class="p-tech">Pandas</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Education</div>
+  <div class="section-title">Academic Background</div>
+  <div class="section-divider"></div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">Bachelor of Science in Computer Science</div>
+      <div class="edu-school">Govt. Graduate College of Science, Wahdat Road (Punjab University)</div>
+      <div class="edu-year">2022 – 2026</div>
+      <span class="edu-grade">CGPA: 3.42</span>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Intermediate (F.Sc.) — Pre-Engineering</div>
+      <div class="edu-school">Superior Group of Colleges, Lahore</div>
+      <div class="edu-year">2020 – 2022</div>
+      <span class="edu-grade">Grade: A</span>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Matriculation — Computer Science</div>
+      <div class="edu-school">Govt. Model Girls High School, Canal View Lahore</div>
+      <div class="edu-year">2018 – 2020</div>
+      <span class="edu-grade">Grade: A+</span>
+    </div>
+  </div>
+
+  <!-- CERT -->
+  <div style="margin-top:3rem;">
+    <div class="section-label" style="margin-bottom:1.2rem;">Certifications</div>
+    <div class="cert-card">
+      <div class="cert-badge">🏅</div>
+      <div>
+        <div class="cert-title">Full Stack AI Course</div>
+        <div class="cert-issuer">Nexskill Trainings — Arfa Tower, Lahore</div>
+        <div class="cert-date">Issued: April 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <div class="section-title">Let's Connect</div>
+  <div class="section-divider"></div>
+  <div class="contact-inner">
+    <p>I'm actively looking for internship and entry-level opportunities in Data Science, AI/ML, and Full-Stack Development. If you have a role or project that's a good fit, I'd love to hear from you!</p>
+    <div class="contact-links">
+      <a href="mailto:amnaakhtar1409@gmail.com" class="contact-link">✉ amnaakhtar1409@gmail.com</a>
+      <a href="https://github.com/AmnaAkhtar44" target="_blank" class="contact-link">⌥ GitHub</a>
+      <a href="https://www.linkedin.com/in/amna-akhtar-534b43334/" target="_blank" class="contact-link">in LinkedIn</a>
+      <a href="tel:+923228449633" class="contact-link">📞 +92 322 844 9633</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Amna Akhtar &nbsp;·&nbsp; Lahore, Punjab, Pakistan &nbsp;·&nbsp; Built with care</p>
+</footer>
+
+</body>
+</html>
